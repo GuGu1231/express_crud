@@ -1,0 +1,4 @@
+node_modules/
+crud_app/
+package.json
+package-lock.json
