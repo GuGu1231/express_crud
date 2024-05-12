@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-const helmet = require("helmet"); // 기본적인 보안을 자동 설정해주는 미들웨어
+const helmet = require("helmet");
 const topicrouter = require("./crud_main/routes/topic.js");
 const indexrouter = require("./crud_main/routes/index.js");
 
