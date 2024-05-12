@@ -2,14 +2,14 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
-const topicrouter = require("./crud_main/routes/topic.js");
-const indexrouter = require("./crud_main/routes/index.js");
+const topicrouter = require("./routes/topic.js");
+const indexrouter = require("./routes/index.js");
 
 const app = express();
 const port = 3000;
 
 // set view engine
-app.set("views", path.join(__dirname, "/crud_main/views"));
+app.set("views", path.join(__dirname, "/views"));
 app.set("view engine", "pug");
 
 // use middle ware
