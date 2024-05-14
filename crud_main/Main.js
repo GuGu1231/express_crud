@@ -4,14 +4,7 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const topicrouter = require("./routes/topic.js");
 const indexrouter = require("./routes/index.js");
-const mysql = require('mysql')
-// const connection = mysql.createConnection({
-//   host: '?',
-//   user: '?',
-//   password: '?',
-//   database: '?'
-// })
-// connection.connect()
+const connection = require("./lib/db.js");
 
 const app = express();
 const port = 3000;

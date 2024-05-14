@@ -2,3 +2,4 @@ node_modules/
 referenceapp/
 package.json
 package-lock.json
+db.js
