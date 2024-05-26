@@ -1,0 +1,66 @@
+extends layout
+
+block content
+    div.p-3.text-bg-dark
+        div.container
+            div.d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
+                a(href="/", class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none")
+                    svg.bi.me-2(width="40", height="32", role="img", aria-label="Bootstrap")
+                        use(xlink:href="#bootstrap")
+                ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
+                    li
+                        a(href="#", class="nav-link px-2 text-secondary") Home
+                    li
+                        a(href="#", class="nav-link px-2 text-white") Features
+                    li
+                        a(href="#", class="nav-link px-2 text-white") Pricing
+                    li
+                        a(href="#", class="nav-link px-2 text-white") FAQs
+                    li
+                        a(href="#", class="nav-link px-2 text-white") About
+                form.col-12.col-lg-auto.mb-3.mb-lg-0.me-lg-3(role="search")
+                    input(type="search", class="form-control form-control-dark text-bg-dark", placeholder="Search...", aria-label="Search")
+                div.text-end
+                    button.btn.btn-outline-light.me-2 Login
+                    button.btn.btn-warning Sign-up
+    div.main
+        h1= title
+        p Welcome to #{title}
+        p 자유게시판(MAIN PAGE)
+        table.table 
+            thead
+                tr
+                    th(scope="col") #
+                    th(scope="col") First
+                    th(scope="col") Last
+                    th(scope="col") Handle
+            tbody
+                each data in datalist
+                    tr
+                        th(scope="row")= data.id
+                        td= data.title
+                        td= data.description
+                        td= data.created
+    //- 여기서 폼값을 넘겨주면 될듯(form 태그 추가)
+    //- textarea까지 추가해주면 될거같은데 좀 머리잘쓰죵
+    button.btn.btn-outline-primary.create(type="button") 글 생성
+    | &nbsp;&nbsp;
+    button.btn.btn-outline-primary(type="submit") 글 수정
+    | &nbsp;&nbsp;
+    button.btn.btn-outline-primary(type="submit") 글 삭제
+
+    button.btn.btn-outline-primary(type="submit") 제출
+    div.container2
+        footer.py-3.my-4
+            ul.nav.justify-content-center.border-bottom.pb-3.mb-3
+                li.nav-item
+                    a(href="#", class="nav-link px-2 text-body-secondary") Home
+                li.nav-item
+                    a(href="#", class="nav-link px-2 text-body-secondary") Features
+                li.nav-item
+                    a(href="#", class="nav-link px-2 text-body-secondary") Pricing
+                li.nav-item
+                    a(href="#", class="nav-link px-2 text-body-secondary") FAQs
+                li.nav-item
+                    a(href="#", class="nav-link px-2 text-body-secondary") About
+            p.text-center.text-body-secondary © 2024 Company, Inc

@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const topicrouter = require("./routes/topic.js");
 const indexrouter = require("./routes/index.js");
-const connection = require("./lib/db.js");
 
 const app = express();
 const port = 3000;
@@ -19,6 +18,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   "/bootstrap",
   express.static(__dirname + "/node_modules/bootstrap/dist/")
+);
+app.use(
+  "/javascripts",
+  express.static(path.join(__dirname, "public/javascripts"))
 );
 
 app.use("/", indexrouter);
