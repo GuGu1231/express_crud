@@ -25,23 +25,20 @@ block content
                     button.btn.btn-warning Sign-up
     div.main
         p 
-            h1 게시판
-        table.table
-            thead
-                tr
-                    th(scope="col") user name
-                    th(scope="col") writing title
-                    th(scope="col") created
-            tbody
-                each data in datalist
-                    tr
-                        th(scope="row")= data.user_name
-                        td.read
-                            a(href=`/writing?id=${data.writing_id}`)= data.title
-                        td= new Date(data.created).toLocaleString('ko-KR')
-                        //- JS의 Date 객체와 method 사용으로 한국어로 변경
-        .button-container
-            button.btn.btn-outline-primary.create(type="button") 글 생성
+            div.col-md-8.position-relative
+                h3.pb-4.mb-4.fst-italic.border-bottom
+                article
+                    //- sql 객체는 배열에 포장되어있음
+                    h2= data[0].title
+                    br
+                    //- 방법이 없어서 html 태그 사용
+                    p #{new Date(data[0].created).toLocaleString('ko-KR')} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by <strong>#{data[0].user_name}</strong>
+                    p= data[0].description
+                    hr
+                .button-container-read
+                    button.btn.btn-outline-primary(type="submit") 글 수정
+                    | &nbsp;&nbsp;
+                    button.btn.btn-outline-primary(type="submit") 글 삭제
     div.container2
         footer.py-3.my-4.sticky-footer
             ul.nav.justify-content-center.border-bottom.pb-3.mb-3

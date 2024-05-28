@@ -3,3 +3,4 @@ referenceapp/
 package.json
 package-lock.json
 .env
+.vscode

@@ -24,24 +24,27 @@ block content
                     button.btn.btn-outline-light.me-2 Login
                     button.btn.btn-warning Sign-up
     div.main
-        p 
-            h1 게시판
-        table.table
-            thead
-                tr
-                    th(scope="col") user name
-                    th(scope="col") writing title
-                    th(scope="col") created
-            tbody
-                each data in datalist
-                    tr
-                        th(scope="row")= data.user_name
-                        td.read
-                            a(href=`/writing?id=${data.writing_id}`)= data.title
-                        td= new Date(data.created).toLocaleString('ko-KR')
-                        //- JS의 Date 객체와 method 사용으로 한국어로 변경
+        p
+            h3 글 작성
+            div.form-floating
+                textarea.form-control(id="title")
+                label(for="title") title
+            br
+            div.form-floating
+                textarea.form-control(id="description")
+                label(for="decription") description
+            div.form-floating
+                select.form-select(id="floatingSelect", aria-label="Floating label select example")
+                   //- db불러와서 선택 필요
+                   //- 이중 쿼리 쓰게 되네(callback hell도 정리해야하는데..)
+                    option(selected) Open this select menu
+                    option(value="1") One
+                    option(value="2") Two
+                    option(value="3") Three
+                label(for="floatingSelect") Works with selects
         .button-container
-            button.btn.btn-outline-primary.create(type="button") 글 생성
+            form(action="/create_process", method="post")
+                button.btn.btn-outline-primary(type="submit") 작성
     div.container2
         footer.py-3.my-4.sticky-footer
             ul.nav.justify-content-center.border-bottom.pb-3.mb-3

@@ -1,1 +1,29 @@
-
+.main {
+  position: relative;
+  font-family: Roboto, sans-serif;
+  width: 60%;
+  margin-left: 18%;
+  margin-right: 10%;
+}
+.button-container {
+  position: absolute;
+  right: 0;
+  bottom: -60px;
+}
+.button-container-read {
+  position: absolute;
+  right: 0;
+  bottom: -60px;
+}
+.sticky-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+td.read {
+  cursor: pointer;
+  text-decoration: underline;
+}
+#description {
+  height: 400px;
+}

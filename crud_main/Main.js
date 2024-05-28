@@ -19,10 +19,7 @@ app.use(
   "/bootstrap",
   express.static(__dirname + "/node_modules/bootstrap/dist/")
 );
-app.use(
-  "/javascripts",
-  express.static(path.join(__dirname, "public/javascripts"))
-);
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexrouter);
 app.use("/topic", topicrouter);
