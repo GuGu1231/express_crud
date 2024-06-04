@@ -25,26 +25,23 @@ block content
                     button.btn.btn-warning Sign-up
     div.main
         p
-            h3 글 작성
-            div.form-floating
-                textarea.form-control(id="title")
-                label(for="title") title
-            br
-            div.form-floating
-                textarea.form-control(id="description")
-                label(for="decription") description
-            div.form-floating
-                select.form-select(id="floatingSelect", aria-label="Floating label select example")
-                   //- db불러와서 선택 필요
-                   //- 이중 쿼리 쓰게 되네(callback hell도 정리해야하는데..)
-                    option(selected) Open this select menu
-                    option(value="1") One
-                    option(value="2") Two
-                    option(value="3") Three
-                label(for="floatingSelect") Works with selects
-        .button-container
             form(action="/create_process", method="post")
-                button.btn.btn-outline-primary(type="submit") 작성
+                h3 글 작성
+                div.form-floating
+                    textarea.form-control(id="title", name="title")
+                    label(for="title") title
+                br
+                div.form-floating
+                    textarea.form-control(id="description", name="description")
+                    label(for="decription") description
+                br
+                div.form-floating
+                    select.form-select(id="floatingSelect", name="selection", aria-label="Floating label select example")
+                        each user, index in userlist
+                            option(value=index+1) #{user.name}
+                    label(for="floatingSelect") user
+                .button-container
+                        button.btn.btn-outline-primary(type="submit") 작성
     div.container2
         footer.py-3.my-4.sticky-footer
             ul.nav.justify-content-center.border-bottom.pb-3.mb-3

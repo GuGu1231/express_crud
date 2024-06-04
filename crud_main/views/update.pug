@@ -24,23 +24,31 @@ block content
                     button.btn.btn-outline-light.me-2 Login
                     button.btn.btn-warning Sign-up
     div.main
-        p 
-            div.col-md-8.position-relative
-                h3.pb-4.mb-4.fst-italic.border-bottom
-                article
-                    //- sql 객체는 배열에 포장되어있음
-                    h2= data[0].title
-                    br
-                    //- 방법이 없어서 html 태그 사용
-                    p #{new Date(data[0].created).toLocaleString('ko-KR')} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by <strong>#{data[0].user_name}</strong>
-                    p= data[0].description
-                    hr
-                .button-container-read
-                    a.btn.btn-outline-primary(href=`/update?id=${data[0].writing_id}`) 글 수정
-                    | &nbsp;&nbsp;
-                    form(action="/delete_process?_method=DELETE", method="post")
-                        input(type="hidden", name="id", value=data[0].writing_id)
-                        button.btn.btn-outline-primary(type="submit") 글 삭제
+        p
+            //- put request 처리
+            form(action="/update_process?_method=PUT", method="post")
+                h3 글 수정
+                input(type="hidden", name="id", value=data[0].writing_id)
+                div.form-floating
+                    //- textarea 내용 설정은 value로 하는게 아닌거도 잊고. 후...
+                    textarea.form-control(id="title", name="title")= data[0].title
+                    label(for="title") title
+                br
+                div.form-floating
+                    textarea.form-control(id="description", name="description")= data[0].description
+                    label(for="decription") description
+                br
+                div.form-floating
+                    select.form-select(id="floatingSelect", name="selection", aria-label="Floating label select example")
+                        each user, index in userlist
+                            //- data[0] 줘야하는거 자꾸 잊고 에러내네 후...
+                            if user.name === data[0].user_name
+                                option(value=index+1 selected) #{user.name} 
+                            else
+                                option(value=index+1) #{user.name}
+                    label(for="floatingSelect") user
+                .button-container
+                        button.btn.btn-outline-primary(type="submit") 작성
     div.container2
         footer.py-3.my-4.sticky-footer
             ul.nav.justify-content-center.border-bottom.pb-3.mb-3

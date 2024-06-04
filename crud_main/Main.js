@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
+const methodOverride = require("method-override");
 const topicrouter = require("./routes/topic.js");
 const indexrouter = require("./routes/index.js");
 
@@ -15,6 +16,7 @@ app.set("view engine", "pug");
 // use middle ware
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride("_method"));
 app.use(
   "/bootstrap",
   express.static(__dirname + "/node_modules/bootstrap/dist/")
