@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   db:
-    image: mysql:latest # 최신 버전의 MySQL 이미지를 사용
+    image: mysql:5.7 # 최신 버전의 MySQL 이미지를 사용
     restart: always # Docker가 시작될 때마다 MySQL 컨테이너를 자동으로 시작
     container_name: mysql-server
     environment: # MySQL 서버의 환경 변수를 설정
@@ -13,6 +13,5 @@ services:
       - "3307:3306"
     volumes: # mysql-data 볼륨을 컨테이너의 /var/lib/mysql 디렉토리에 마운트
       - mysql-data:/var/lib/mysql
-
 volumes:
   mysql-data:
