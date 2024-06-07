@@ -37,21 +37,10 @@ block content
                     hr
                 .button-container-read
                     a.btn.btn-outline-primary(href=`/update?id=${data[0].writing_id}`) 글 수정
-                    | &nbsp;&nbsp;
-                    form(action="/delete_process?_method=DELETE", method="post")
+                    | &nbsp;&nbsp;    
+                    //- form(id="deleteForm", action="/delete_process?_method=DELETE", method="post")
+                    //-     input(type="hidden", name="id", value=data[0].writing_id)
+                    //-     button.btn.btn-outline-primary(type="submit") 글 삭제
+                    form(id="deleteForm", action="/delete_process?_method=DELETE", method="post")
                         input(type="hidden", name="id", value=data[0].writing_id)
                         button.btn.btn-outline-primary(type="submit") 글 삭제
-    div.container2
-        footer.py-3.my-4.sticky-footer
-            ul.nav.justify-content-center.border-bottom.pb-3.mb-3
-                li.nav-item
-                    a(href="/", class="nav-link px-2 text-body-secondary") Home
-                li.nav-item
-                    a(href="/", class="nav-link px-2 text-body-secondary") Features
-                li.nav-item
-                    a(href="/", class="nav-link px-2 text-body-secondary") Pricing
-                li.nav-item
-                    a(href="/", class="nav-link px-2 text-body-secondary") FAQs
-                li.nav-item
-                    a(href="/", class="nav-link px-2 text-body-secondary") About
-            p.text-center.text-body-secondary GuGu's CRUD web

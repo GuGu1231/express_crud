@@ -16,6 +16,8 @@
 // DOMContentLoaded 이벤트 핸들러 내부에서
 // .create와 .update 클래스를 가진 요소를 찾아 클릭 이벤트 핸들러를 등록
 // DOMContentLoaded 이벤트는 페이지의 DOM이 완전히 로드된 후에 발생하기에 작동
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const createButton = document.querySelector(".create");
   if (createButton) {
@@ -25,4 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     console.error("'.create' 클래스를 가진 요소를 찾을 수 없습니다.");
   }
+});
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('deleteForm').addEventListener('submit', (event) => {
+    if (!confirm("정말 삭제하시겠습니까?")) {
+      // 사용자가 '취소'를 클릭하면, 폼 제출을 취소합니다.
+      event.preventDefault();
+    }
+  });
 });

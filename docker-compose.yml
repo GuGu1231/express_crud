@@ -1,7 +1,8 @@
 version: "3.7"
 services:
   db:
-    image: mysql:5.7 # 최신 버전의 MySQL 이미지를 사용
+    image: mysql:5.7 # 5.7 버전의 MySQL 이미지를 사용
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     restart: always # Docker가 시작될 때마다 MySQL 컨테이너를 자동으로 시작
     container_name: mysql-server
     environment: # MySQL 서버의 환경 변수를 설정
