@@ -38,9 +38,6 @@ block content
                 .button-container-read
                     a.btn.btn-outline-primary(href=`/update?id=${data[0].writing_id}`) 글 수정
                     | &nbsp;&nbsp;    
-                    //- form(id="deleteForm", action="/delete_process?_method=DELETE", method="post")
-                    //-     input(type="hidden", name="id", value=data[0].writing_id)
-                    //-     button.btn.btn-outline-primary(type="submit") 글 삭제
                     form(id="deleteForm", action="/delete_process?_method=DELETE", method="post")
                         input(type="hidden", name="id", value=data[0].writing_id)
                         button.btn.btn-outline-primary(type="submit") 글 삭제

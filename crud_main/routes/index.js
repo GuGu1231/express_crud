@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const connection = require("../lib/db.js");
-// 일단 여기에 다 만들어보고 정리가 필요하면 라우터 분리 진행
-// topic.js 보류
+const db = require("../lib/db.js");
+const connection = db.connection;
 
 router.get("/", (req, res) => {
   connection.query(
