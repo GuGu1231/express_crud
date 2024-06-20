@@ -24,22 +24,23 @@ block content
                     a.btn.btn-outline-light.me-2(href="/auth/login") Login
                     a.btn.btn-warning(href="/auth/register") Sign Up
     div.main
-        p 
-            h1 게시판
-        table.table
-            thead
-                tr
-                    th(scope="col") user name
-                    th(scope="col") writing title
-                    th(scope="col") created
-            tbody
-                each data in datalist
-                    tr
-                        th(scope="row")= data.user_name
-                        td.read
-                            a(href=`/writing?id=${data.writing_id}`)= data.title
-                        td= new Date(data.created).toLocaleString('ko-KR')
-                        //- JS의 Date 객체와 method 사용으로 한국어로 변경
-        .button-container
-            //- type을 button으로 줘야 작동
-            button.btn.btn-outline-primary.create(type="button") 글 생성
+        div.container.mt-5
+            div.alert.alert-info
+                p #{message}
+            div.row.justify-content-center
+                div.col-md-6
+                    div.card
+                        div.card-header
+                            h3.text-center Login
+                        div.card-body
+                            form(action="/auth/login_process", method="post")
+                                div.form-group
+                                    label(for="username") Email
+                                    input.form-control(type="text", name="email", required=true)
+                                div.form-group.mt-3
+                                    label(for="password") Password
+                                    input.form-control(type="password", name="password", required=true)
+                                button.btn.btn-primary.mt-3(type="submit") Login
+                        
+                    div.text-center.mt-3
+                        a(href="/auth/register") Don't have an account? Sign Up

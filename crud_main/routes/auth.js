@@ -1,14 +1,44 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const db = require("../lib/db.js");
+const passport = require("../lib/passport.js");
+
+const connection = db.connection;
 
 router.get("/register", (req, res) => {
-  res.render("register", { title: "Express" });
+  res.render("register");
 });
 router.get("/login", (req, res) => {
-  res.render("login");
+  req.session.save(() => {
+    const flash = req.flash("message");
+    res.render("login", { message: flash });
+  });
 });
 
+// router.post("/register_process", (req, res) => {
+//   const post = req.body;
+//   const nickname = post.nickname;
+//   const email = post.email;
+//   const password = post.password;
+//   bcrypt.hash(password, 10, (err, hash) => {
+//     // 일단 기존유저가 없다는 가정하에 진행해보죠
+//     if (err) {
+//       console.error(err);
+//     }
+//     connection.query(
+//       "INSERT INTO users (nickname, email, password) VALUES (?, ?, ?)",
+//       [nickname, email, hash],
+//       (err, result) => {
+//         if (err) {
+//           console.error(err);
+//           return;
+//         }
+//         res.redirect("/auth/login");
+//       }
+//     );
+//   });
+// });
 router.post("/register_process", (req, res) => {
   const post = req.body;
   const nickname = post.nickname;
@@ -17,37 +47,69 @@ router.post("/register_process", (req, res) => {
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       console.error(err);
+      return res.json({
+        success: false,
+        message: "Error occurred during password hashing.",
+      });
     }
+    connection.query(
+      "INSERT INTO users (nickname, email, password) VALUES (?, ?, ?)",
+      [nickname, email, hash],
+      (err, result) => {
+        if (err) {
+          console.error(err);
+          return res.json({
+            success: false,
+            message: "Error occurred during user registration.",
+          });
+        }
+        res.json({ success: true, message: "User registered successfully." });
+      }
+    );
+  });
 });
-router.post("/register_process", function (request, response) {
-  bcrypt.hash(password, 10, (err, hash) => {
-    var user = db.get("users").find({ email: email }).value();
-    if (user) {
-      // 기존 유저가 있는 경우(구글 아이디로 로그인한 경우)
-      user.password = hash;
-      user.nickname = nickname;
-      db.get("users").find({ id: user.id }).assign(user).write();
-    } else {
-      // 기존 유저가 없는 경우
-      var user = {
-        id: nanoid.nanoid(),
-        email: email,
-        password: hash,
-        nickname: nickname,
-      };
-      db.get("users").push(user).write();
+
+router.post("/login_process", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (req.session.flash) {
+      req.session.flash = {};
     }
-    request.login(user, () => {
-      response.redirect("/");
+    req.flash("message", info.message); // 실패 메시지 설정
+
+    req.session.save(() => {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        return res.redirect("/auth/login");
+      }
+      req.logIn(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        return req.session.save(() => {
+          res.redirect("/");
+        });
+      });
+    });
+  })(req, res, next);
+});
+
+router.get("/logout", (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      console.error(err);
+    }
+  });
+  req.session.save(() => {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error(err);
+      }
+      res.clearCookie("connect.sid"); // 설정한 세션 쿠키의 이름(이건 기본 이름)
+      res.redirect("/");
     });
   });
 });
-// router.post(
-//   "/login_process",
-//   passport.authenticate("local", {
-//     successRedirect: "/",
-//     failureRedirect: "/auth/login",
-//   })
-// );
 
 module.exports = router;

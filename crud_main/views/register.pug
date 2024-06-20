@@ -33,15 +33,15 @@ block content
                             form
                                 div.form-group.mt-3
                                     label(for="inputName") Nickname
-                                    input.form-control(type="text", id="inputName", name="nickname", placeholder="nickname")
+                                    input.form-control(type="text", id="inputName", name="nickname", placeholder="nickname", required=true)
                                 div.form-group.mt-3
                                     label(for="inputEmail") Email address
-                                    input.form-control(type="email", id="inputEmail", name="email", placeholder="email")
+                                    input.form-control(type="email", id="inputEmail", name="email", placeholder="email", required=true)
                                 div.form-group.mt-3
                                     label(for="inputPassword") Password
-                                    input.form-control(type="password", id="inputPassword", name="password", placeholder="Password")
+                                    input.form-control(type="password", id="inputPassword", name="password", placeholder="Password", required=true)
                                 div.form-group.mt-3
                                     label(for="inputConfirmPassword") Confirm Password
-                                    input.form-control(type="password", id="inputConfirmPassword", placeholder="Confirm Password")
+                                    input.form-control(type="password", id="inputConfirmPassword", placeholder="Confirm Password", required=true)
                                 div.form-group.d-flex.flex-column-reverse.align-items-end.mt-3
                                     button.btn.btn-primary(type="submit") Sign Up

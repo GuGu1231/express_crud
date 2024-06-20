@@ -24,7 +24,7 @@ INSERT INTO `writing` VALUES (4,'PostgreSQL','PostgreSQL is ...','2018-01-23 01:
 INSERT INTO `writing` VALUES (5,'MongoDB','MongoDB is ...','2018-01-30 12:31:03',1);
 
 CREATE TABLE users (
-    id VARCHAR(255),
+    id INT AUTO_INCREMENT,
     email VARCHAR(255),
     password VARCHAR(255),
     nickname VARCHAR(255),

@@ -11,7 +11,8 @@ const port = 3000;
 const db = require("./lib/db.js");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
-const sessionStore = new MySQLStore(db.users);
+const sessionStore = new MySQLStore(db.sessionusers);
+const flash = require("connect-flash");
 const passport = require("./lib/passport.js");
 
 // set view engine
@@ -23,15 +24,20 @@ app.use(
   session({
     secure: true,
     HttpOnly: true,
-    key: "session_cookie_name",
     secret: process.env.SESSION_SECRET,
     store: sessionStore,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      // 클라이언트 세션 쿠키 유효 기간 제어
+      maxAge: 60 * 60 * 1000, // 1 hour
+    },
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash()); // session에 flash 메시지를 저장
+// 메시지가 사용자에게 표시된 후에는 자동으로 세션에서 제거됨
 
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -42,15 +48,22 @@ app.use(
 );
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated();
+  next();
+});
+
 app.use("/", indexrouter);
 app.use("/auth", authrouter);
 
-app.use(function (req, res, next) {
+// 404 처리 미들웨어는 일반적으로 모든 라우터 아래에 위치해야 함
+// 요청이 어떤 라우터에도 매칭되지 않을 때만 이 미들웨어가 실행되기 때문
+app.use((req, res, next) => {
   res.status(404).send("Sorry cant find that!");
 });
 
 // error handling middleware
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
