@@ -39,6 +39,7 @@ router.get("/login", (req, res) => {
 //     );
 //   });
 // });
+
 router.post("/register_process", (req, res) => {
   const post = req.body;
   const nickname = post.nickname;
@@ -63,7 +64,7 @@ router.post("/register_process", (req, res) => {
             message: "Error occurred during user registration.",
           });
         }
-        res.json({ success: true, message: "User registered successfully." });
+        res.json({ success: true, message: "" });
       }
     );
   });

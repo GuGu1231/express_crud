@@ -40,7 +40,22 @@ app.use(flash()); // session에 flash 메시지를 저장
 // 메시지가 사용자에게 표시된 후에는 자동으로 세션에서 제거됨
 
 app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: [
+          "'self'",
+          "https://cdn.jsdelivr.net/npm/axios/dist/",
+          "https://cdn.jsdelivr.net/npm/sweetalert2@10",
+        ],
+      },
+    },
+  })
+);
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json()); // 클라이언트가 보낸 json파일 파싱위해 필요
 app.use(methodOverride("_method"));
 app.use(
   "/bootstrap",

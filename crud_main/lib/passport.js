@@ -47,7 +47,9 @@ passport.use(
                 message: "Incorrect password",
               });
             }
-            return cb(null, user[0]);
+            return cb(null, user[0], {
+              message: "", // 일단 성공한 경우에도 message 설정해줘야함
+            });
           });
         }
       );
