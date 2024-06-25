@@ -7,7 +7,7 @@ const sessionusers = {
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   clearExpired: true,
-  checkExpirationInterval: 15 * 60 * 1000, // 15분
+  checkExpirationInterval: 5 * 60 * 1000, // 5분
   expiration: 60 * 60 * 1000,
 };
 

@@ -18,20 +18,25 @@
 // DOMContentLoaded 이벤트는 페이지의 DOM이 완전히 로드된 후에 발생하기에 작동
 
 document.addEventListener("DOMContentLoaded", () => {
-  const createButton = document.querySelector(".create");
-  if (createButton) {
-    createButton.addEventListener("click", () => {
-      location.href = "/create";
-    });
-  } else {
-    console.error("'.create' 클래스를 가진 요소를 찾을 수 없습니다.");
-  }
+  document.querySelector(".create").addEventListener("click", () => {
+    location.href = "/create";
+  });
 });
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("deleteForm").addEventListener("submit", (event) => {
-    if (!confirm("정말 삭제하시겠습니까?")) {
-      // 사용자가 '취소'를 클릭하면, 폼 제출을 취소합니다.
-      event.preventDefault();
-    }
+    event.preventDefault();
+    Swal.fire({
+      title: "이 글을 삭제하시겠습니까?",
+      text: "이 작업은 되돌릴 수 없습니다!",
+      icon: "warning",
+      showCancelButton: true,
+      cancelButtonColor: "#d33",
+      confirmButtonText: "네, 진행합니다!",
+      confirmButtonColor: "#3085d6",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        document.getElementById("deleteForm").submit();
+      }
+    });
   });
 });

@@ -16,30 +16,6 @@ router.get("/login", (req, res) => {
   });
 });
 
-// router.post("/register_process", (req, res) => {
-//   const post = req.body;
-//   const nickname = post.nickname;
-//   const email = post.email;
-//   const password = post.password;
-//   bcrypt.hash(password, 10, (err, hash) => {
-//     // 일단 기존유저가 없다는 가정하에 진행해보죠
-//     if (err) {
-//       console.error(err);
-//     }
-//     connection.query(
-//       "INSERT INTO users (nickname, email, password) VALUES (?, ?, ?)",
-//       [nickname, email, hash],
-//       (err, result) => {
-//         if (err) {
-//           console.error(err);
-//           return;
-//         }
-//         res.redirect("/auth/login");
-//       }
-//     );
-//   });
-// });
-
 router.post("/register_process", (req, res) => {
   const post = req.body;
   const nickname = post.nickname;

@@ -55,7 +55,7 @@ app.use(
   })
 );
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json()); // 클라이언트가 보낸 json파일 파싱위해 필요
+app.use(bodyParser.json()); // 클라이언트가 보낸 json 데이터 파싱을 위해 필요
 app.use(methodOverride("_method"));
 app.use(
   "/bootstrap",

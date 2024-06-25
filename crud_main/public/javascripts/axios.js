@@ -1,13 +1,11 @@
 document.getElementById("registerform").addEventListener("submit", (event) => {
-  event.preventDefault();
   // 이 코드가 없으면, 기본 동작이 실행되어 예상치 못한 결과를 초래
   // 새로고침 or 웹 페이지 이동으로 아래의 JS 코드가 끊김
-
+  event.preventDefault();
   // input[name="nickname"]은 name 속성이 nickname인 첫 번째 input 요소 선택
   var nickname = document.querySelector('input[name="nickname"]').value;
   var email = document.querySelector('input[name="email"]').value;
   var password = document.querySelector('input[name="password"]').value;
-  // 서버에게 POST 요청을 보냅니다.
   axios
     .post("/auth/register_process", {
       nickname: nickname,

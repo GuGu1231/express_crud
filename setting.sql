@@ -28,6 +28,5 @@ CREATE TABLE users (
     email VARCHAR(255),
     password VARCHAR(255),
     nickname VARCHAR(255),
-    googleID VARCHAR(255),
     PRIMARY KEY (id)
 );

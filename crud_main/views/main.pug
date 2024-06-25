@@ -11,13 +11,8 @@ block content
                     li
                         a(href="/", class="nav-link px-2 text-secondary") Home
                     li
-                        a(href="/", class="nav-link px-2 text-white") Features
-                    li
-                        a(href="/", class="nav-link px-2 text-white") Pricing
-                    li
-                        a(href="/", class="nav-link px-2 text-white") FAQs
-                    li
-                        a(href="/", class="nav-link px-2 text-white") About
+                        a(href="/", class="nav-link px-2 text-white") 미구현
+
                 form.col-12.col-lg-auto.mb-3.mb-lg-0.me-lg-3(role="search")
                     input(type="search", class="form-control form-control-dark text-bg-dark", placeholder="Search...", aria-label="Search")
                 div.text-end
@@ -44,5 +39,6 @@ block content
                         td= new Date(data.created).toLocaleString('ko-KR')
                         //- JS의 Date 객체와 method 사용으로 한국어로 변경
         .button-container
-            //- type을 button으로 줘야 작동
-            button.btn.btn-outline-primary.create(type="button") 글 생성
+            //- form이 아니면 type을 button으로 줘야 작동
+            if isAuthenticated
+                button.btn.btn-outline-primary.create(type="button") 글 생성

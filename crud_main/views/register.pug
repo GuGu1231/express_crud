@@ -11,18 +11,15 @@ block content
                     li
                         a(href="/", class="nav-link px-2 text-secondary") Home
                     li
-                        a(href="/", class="nav-link px-2 text-white") Features
-                    li
-                        a(href="/", class="nav-link px-2 text-white") Pricing
-                    li
-                        a(href="/", class="nav-link px-2 text-white") FAQs
-                    li
-                        a(href="/", class="nav-link px-2 text-white") About
+                        a(href="/", class="nav-link px-2 text-white") 미구현
                 form.col-12.col-lg-auto.mb-3.mb-lg-0.me-lg-3(role="search")
                     input(type="search", class="form-control form-control-dark text-bg-dark", placeholder="Search...", aria-label="Search")
                 div.text-end
-                    button.btn.btn-outline-light.me-2 Login
-                    button.btn.btn-warning Sign-up
+                    if isAuthenticated
+                        a.btn.btn-outline-light.me-2(href="/auth/logout") Logout
+                    else
+                        a.btn.btn-outline-light.me-2(href="/auth/login") Login
+                        a.btn.btn-warning(href="/auth/register") Sign Up 
     div.main
         p
             div.container
