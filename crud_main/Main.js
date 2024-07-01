@@ -67,6 +67,10 @@ app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated();
   next();
 });
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
 
 app.use("/", indexrouter);
 app.use("/auth", authrouter);
@@ -74,7 +78,7 @@ app.use("/auth", authrouter);
 // 404 처리 미들웨어는 일반적으로 모든 라우터 아래에 위치해야 함
 // 요청이 어떤 라우터에도 매칭되지 않을 때만 이 미들웨어가 실행되기 때문
 app.use((req, res, next) => {
-  res.status(404).send("Sorry cant find that!");
+  res.status(404).send("페이지를 찾지 못했습니다.");
 });
 
 // error handling middleware

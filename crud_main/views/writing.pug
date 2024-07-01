@@ -17,6 +17,9 @@ block content
                 div.text-end
                     if isAuthenticated
                         a.btn.btn-outline-light.me-2(href="/auth/logout") Logout
+                        a(href="/user")
+                            i.fa.fa-user.icon-spacing
+                            |#{user.nickname}
                     else
                         a.btn.btn-outline-light.me-2(href="/auth/login") Login
                         a.btn.btn-warning(href="/auth/register") Sign Up 
@@ -32,9 +35,11 @@ block content
                     p #{new Date(data[0].created).toLocaleString('ko-KR')} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by <strong>#{data[0].user_name}</strong>
                     p= data[0].description
                     hr
-                .button-container-read
-                    a.btn.btn-outline-primary(href=`/update?id=${data[0].writing_id}`) 글 수정
-                    | &nbsp;&nbsp;    
-                    form(id="deleteForm", action="/delete_process?_method=DELETE", method="post")
-                        input(type="hidden", name="id", value=data[0].writing_id)
-                        button.btn.btn-outline-primary(type="submit") 글 삭제
+                //- 현재 로그인한 id와 이 글 작성자의 id가 같은지 체크    
+                if (user.id === data[0].user_id)
+                    .button-container-read
+                        a.btn.btn-outline-primary(href=`/update?id=${data[0].writing_id}`) 글 수정
+                        | &nbsp;&nbsp;    
+                        form(id="deleteForm", action="/delete_process?_method=DELETE", method="post")
+                            input(type="hidden", name="id", value=data[0].writing_id)
+                            button.btn.btn-outline-primary(type="submit") 글 삭제

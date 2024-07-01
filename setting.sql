@@ -17,16 +17,11 @@ CREATE TABLE `writing` (
   PRIMARY KEY (`id`)
 );
 
-INSERT INTO `writing` VALUES (1,'MySQL','MySQL is...','2018-01-01 12:10:11',1);
-INSERT INTO `writing` VALUES (2,'Oracle','Oracle is ...','2018-01-03 13:01:10',1);
-INSERT INTO `writing` VALUES (3,'SQL Server','SQL Server is ...','2018-01-20 11:01:10',2);
-INSERT INTO `writing` VALUES (4,'PostgreSQL','PostgreSQL is ...','2018-01-23 01:03:03',3);
-INSERT INTO `writing` VALUES (5,'MongoDB','MongoDB is ...','2018-01-30 12:31:03',1);
-
 CREATE TABLE users (
-    id INT AUTO_INCREMENT,
-    email VARCHAR(255),
-    password VARCHAR(255),
-    nickname VARCHAR(255),
-    PRIMARY KEY (id)
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nickname VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('user', 'admin') DEFAULT 'user',
+    UNIQUE(email)
 );

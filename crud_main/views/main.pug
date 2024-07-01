@@ -18,9 +18,13 @@ block content
                 div.text-end
                     if isAuthenticated
                         a.btn.btn-outline-light.me-2(href="/auth/logout") Logout
+                        a(href="/user")
+                            i.fa.fa-user.icon-spacing
+                            |#{user.nickname}
                     else
                         a.btn.btn-outline-light.me-2(href="/auth/login") Login
                         a.btn.btn-warning(href="/auth/register") Sign Up 
+
     div.main
         p 
             h1 게시판
@@ -35,7 +39,7 @@ block content
                     tr
                         th(scope="row")= data.user_name
                         td.read
-                            a(href=`/writing?id=${data.writing_id}`)= data.title
+                            a.writing-link(href=`/writing?id=${data.writing_id}`)= data.title
                         td= new Date(data.created).toLocaleString('ko-KR')
                         //- JS의 Date 객체와 method 사용으로 한국어로 변경
         .button-container

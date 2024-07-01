@@ -17,23 +17,11 @@ block content
                 div.text-end
                     if isAuthenticated
                         a.btn.btn-outline-light.me-2(href="/auth/logout") Logout
+                        a(href="/user")
+                            i.fa.fa-user.icon-spacing
+                            |#{user.nickname}
                     else
                         a.btn.btn-outline-light.me-2(href="/auth/login") Login
                         a.btn.btn-warning(href="/auth/register") Sign Up 
     div.main
-        p
-            //- put request 처리
-            form(action="/update_process?_method=PUT", method="post")
-                h3 글 수정
-                input(type="hidden", name="id", value=data[0].writing_id)
-                div.form-floating
-                    //- textarea 내용 설정은 value로 하는게 아닌거도 잊고. 후...
-                    textarea.form-control(id="title", name="title")= data[0].title
-                    label(for="title") title
-                br
-                div.form-floating
-                    textarea.form-control(id="description", name="description")= data[0].description
-                    label(for="decription") description
-                br
-                .button-container
-                        button.btn.btn-outline-primary(type="submit") 작성
+        
